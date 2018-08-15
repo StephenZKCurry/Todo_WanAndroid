@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#26A974</color>
+    <color name="colorPrimaryDark">#26A974</color>
+    <color name="colorAccent">#26A974</color>
+    <color name="color_main">#26A974</color>
+    <color name="color_widget">#FFFFFF</color>
+    <color name="color_divider">#66cacaca</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_light_grey">#ffbebebe</color>
+    <color name="color_todo">#26A974</color>
+    <color name="color_done">#E09838</color>
+    <!-- 字体颜色 -->
+    <color name="font_default">#4E4E4E</color>
+    <color name="font_gory_theme">#999999</color>
+    <color name="font_hint">#848484</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+</resources>

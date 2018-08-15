@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#eee" />
+
+        <RadioGroup
+            android:id="@+id/rg_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5">
+
+            <RadioButton
+                android:id="@+id/rb_todo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_tab_todo"
+                android:gravity="center"
+                android:text="@string/main_title_todo"
+                android:textColor="@drawable/selector_tab_text"
+                android:textSize="@dimen/sp_12" />
+
+            <RadioButton
+                android:id="@+id/rb_done"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_tab_done"
+                android:gravity="center"
+                android:text="@string/main_title_done"
+                android:textColor="@drawable/selector_tab_text"
+                android:textSize="@dimen/sp_12" />
+
+            <RadioButton
+                android:id="@+id/rb_setting"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/selector_tab_setting"
+                android:gravity="center"
+                android:text="@string/main_title_setting"
+                android:textColor="@drawable/selector_tab_text"
+                android:textSize="@dimen/sp_12" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+</LinearLayout>
