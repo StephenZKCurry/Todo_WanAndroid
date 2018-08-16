@@ -9,7 +9,9 @@
     <color name="color_transparent">#00000000</color>
     <color name="color_light_grey">#ffbebebe</color>
     <color name="color_todo">#26A974</color>
+    <color name="color_todo_light">#F7FFFD</color>
     <color name="color_done">#E09838</color>
+    <color name="color_done_light">#FFFBF4</color>
     <!-- 字体颜色 -->
     <color name="font_default">#4E4E4E</color>
     <color name="font_gory_theme">#999999</color>

@@ -38,6 +38,14 @@
             android:name=".ui.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
+        <!-- 添加待办清单页面 -->
+        <activity
+            android:name=".ui.todo.AddTodoActivity"
+            android:screenOrientation="portrait" />
+        <!-- 清单详情页面 -->
+        <activity
+            android:name=".ui.todo.TodoDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

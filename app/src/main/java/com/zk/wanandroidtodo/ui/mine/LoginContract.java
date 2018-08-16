@@ -4,7 +4,7 @@ import com.zk.wanandroidtodo.base.BasePresenter;
 import com.zk.wanandroidtodo.base.IBaseModel;
 import com.zk.wanandroidtodo.base.IBaseView;
 import com.zk.wanandroidtodo.bean.DataResponse;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 
 import io.reactivex.Observable;
 
@@ -33,7 +33,7 @@ public interface LoginContract {
          * @param password 密码
          * @return
          */
-        Observable<DataResponse<User>> doLogin(String username, String password);
+        Observable<DataResponse<UserBean>> doLogin(String username, String password);
     }
 
     interface ILoginView extends IBaseView {
@@ -42,7 +42,7 @@ public interface LoginContract {
          *
          * @param user 用户信息
          */
-        void showLoginSuccess(User user);
+        void showLoginSuccess(UserBean user);
 
         /**
          * 登录失败

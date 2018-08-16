@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.zk.wanandroidtodo.R;
 import com.zk.wanandroidtodo.base.BasePresenter;
 import com.zk.wanandroidtodo.base.activity.BaseMVPActivity;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 import com.zk.wanandroidtodo.ui.MainActivity;
 import com.zk.wanandroidtodo.utils.ActivityUtils;
 import com.zk.wanandroidtodo.utils.Constant;
@@ -72,7 +72,7 @@ public class LoginActivity extends BaseMVPActivity<LoginContract.LoginPresenter,
      * @param user 用户信息
      */
     @Override
-    public void showLoginSuccess(User user) {
+    public void showLoginSuccess(UserBean user) {
         showToast(getString(R.string.login_success));
         // 保存用户信息
         SpUtils.setString(mContext, Constant.USER_ID, user.getId() + "");

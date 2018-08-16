@@ -1,18 +1,22 @@
 package com.zk.wanandroidtodo.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.zk.wanandroidtodo.R;
 import com.zk.wanandroidtodo.base.activity.BaseActivity;
-import com.zk.wanandroidtodo.ui.list.DoneListFragment;
-import com.zk.wanandroidtodo.ui.list.TodoListFragment;
+import com.zk.wanandroidtodo.ui.todo.AddTodoActivity;
+import com.zk.wanandroidtodo.ui.todo.TodoListFragment;
+import com.zk.wanandroidtodo.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +75,8 @@ public class MainActivity extends BaseActivity {
         super.initView();
         tvTitle.setText(getString(R.string.main_title_todo));
         mFragments = new ArrayList<>();
-        mFragments.add(TodoListFragment.newInstance());
-        mFragments.add(DoneListFragment.newInstance());
+        mFragments.add(TodoListFragment.newInstance(false));
+        mFragments.add(TodoListFragment.newInstance(true));
         mFragments.add(SettingFragment.newInstance());
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), mFragments));
         mViewPager.setCurrentItem(0);
@@ -111,6 +115,8 @@ public class MainActivity extends BaseActivity {
                     default:
                         break;
                 }
+                // 调用onPrepareOptionsMenu()
+                invalidateOptionsMenu();
             }
 
             @Override
@@ -137,6 +143,31 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (mViewPager.getCurrentItem() == FRAGMENT_TODO) {
+            menu.findItem(R.id.menu_add).setVisible(true);
+        } else {
+            menu.findItem(R.id.menu_add).setVisible(false);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_add) {
+            // 跳转新增事项页面
+            ActivityUtils.startActivity(mContext, new Intent(mContext, AddTodoActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // 按两次返回键退出

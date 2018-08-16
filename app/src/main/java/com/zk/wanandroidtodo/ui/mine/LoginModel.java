@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.zk.wanandroidtodo.api.ApiService;
 import com.zk.wanandroidtodo.bean.DataResponse;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 import com.zk.wanandroidtodo.manager.RetrofitManager;
 import com.zk.wanandroidtodo.utils.RxSchedulers;
 
@@ -25,15 +25,15 @@ public class LoginModel implements LoginContract.ILoginModel {
     }
 
     @Override
-    public Observable<DataResponse<User>> doLogin(final String username, final String password) {
+    public Observable<DataResponse<UserBean>> doLogin(final String username, final String password) {
         return RetrofitManager.createApi(ApiService.class, ApiService.BASE_URL)
                 .doLogin(username, password)
-                .filter(new Predicate<DataResponse<User>>() {
+                .filter(new Predicate<DataResponse<UserBean>>() {
                     @Override
-                    public boolean test(DataResponse<User> dataResponse) throws Exception {
+                    public boolean test(DataResponse<UserBean> dataResponse) throws Exception {
                         return !TextUtils.isEmpty(username) && !TextUtils.isEmpty(password);
                     }
                 })
-                .compose(RxSchedulers.<DataResponse<User>>applySchedulers());
+                .compose(RxSchedulers.<DataResponse<UserBean>>applySchedulers());
     }
 }

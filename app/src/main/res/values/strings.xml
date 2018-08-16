@@ -23,6 +23,27 @@
     <string name="main_title_todo">待办清单</string>
     <string name="main_title_done">已完成清单</string>
     <string name="main_title_setting">设置</string>
+    <string name="menu_title_add">新增清单</string>
+    <string name="confirm_delete_todo">确定删除该条清单?</string>
+    <string name="delete_todo_success">删除清单成功</string>
+    <string name="delete_todo_failed">删除清单失败</string>
+    <string name="confirm_update_todo_status">确定更新该条清单状态?</string>
+    <string name="update_todo_status_success">更新清单状态成功</string>
+    <string name="update_todo_status_failed">更新清单状态失败</string>
+
+    <!-- 新增Todo -->
+    <string name="add_todo_title">添加待办清单</string>
+    <string name="add_todo_title_hint">请输入待办清单标题</string>
+    <string name="add_todo_content_hint">请输入待办清单内容（非必填）</string>
+    <string name="add_todo_submit">保存</string>
+    <string name="add_todo_success">添加待办清单成功</string>
+    <string name="add_todo_failed">添加待办清单失败</string>
+
+    <!-- Todo详情 -->
+    <string name="todo_detail_title">清单详情</string>
+    <string name="update_todo_success">更新清单成功</string>
+    <string name="update_todo_failed">更新清单失败</string>
+    <string name="menu_title_edit">编辑清单</string>
 
     <!-- 设置 -->
     <string name="setting_title_nightmode">切换日/夜间模式</string>

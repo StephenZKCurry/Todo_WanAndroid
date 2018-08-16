@@ -26,7 +26,8 @@ public class Constant {
     public static final String USER_PASSWORD = "user_password"; // 密码
 
     // RxBus
-    public final static int RX_BUS_CODE_LOGIN = 0; // 登录或退出登录操作
+    public final static int RX_BUS_CODE_REFRESH = 0; // 新增或更新清单内容，刷新列表
+    public final static int RX_BUS_CODE_REFRESH_STATUS = 1; // 更新清单状态，刷新列表
 
     // 夜间模式
     public static final String NIGHT_MODEL = "night_model";

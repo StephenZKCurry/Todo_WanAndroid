@@ -7,7 +7,7 @@ import java.util.List;
  * @author: zhukai
  * @date: 2018/3/12 16:25
  */
-public class User {
+public class UserBean {
 
     /**
      * collectIds : []

@@ -56,4 +56,8 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:0.9.0.2'
     // 文字动画
     implementation 'com.yanzhikai:TextPathView:0.1.2'
+    // 时间选择控件
+    implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.5.6') {
+        exclude group: 'com.android.support'
+    }
 }

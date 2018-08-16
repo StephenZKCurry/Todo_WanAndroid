@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.zk.wanandroidtodo.base.MyApplication;
 import com.zk.wanandroidtodo.bean.DataResponse;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 import com.zk.wanandroidtodo.utils.Constant;
 import com.zk.wanandroidtodo.utils.NetworkUtils;
 
@@ -41,9 +41,9 @@ public class RegisterPresenter extends RegisterContract.RegisterPresenter {
         }
         mIView.showProgressDialog("请稍后...");
         mRxManager.register(mIModel.doRegister(username, password, repassword)
-                .subscribe(new Consumer<DataResponse<User>>() {
+                .subscribe(new Consumer<DataResponse<UserBean>>() {
                     @Override
-                    public void accept(DataResponse<User> dataResponse) throws Exception {
+                    public void accept(DataResponse<UserBean> dataResponse) throws Exception {
                         if (dataResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
                             // 注册成功
                             mIView.showRegisterSuccess(dataResponse.getData());

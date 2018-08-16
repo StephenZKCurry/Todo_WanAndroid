@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.zk.wanandroidtodo.R;
 import com.zk.wanandroidtodo.base.BasePresenter;
 import com.zk.wanandroidtodo.base.activity.BaseMVPActivity;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 import com.zk.wanandroidtodo.utils.ActivityUtils;
 
 import butterknife.BindView;
@@ -89,7 +89,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterContract.RegisterP
      * @param user 用户信息
      */
     @Override
-    public void showRegisterSuccess(User user) {
+    public void showRegisterSuccess(UserBean user) {
         View dialog = getLayoutInflater().inflate(R.layout.dialog_register_success, (ViewGroup) findViewById(R.id.dialog));
         // 注册成功信息
         TextView tvMessage = (TextView) dialog.findViewById(R.id.tv_message);

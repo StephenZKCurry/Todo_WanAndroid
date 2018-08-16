@@ -4,7 +4,7 @@ import com.zk.wanandroidtodo.base.BasePresenter;
 import com.zk.wanandroidtodo.base.IBaseModel;
 import com.zk.wanandroidtodo.base.IBaseView;
 import com.zk.wanandroidtodo.bean.DataResponse;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 
 import io.reactivex.Observable;
 
@@ -35,7 +35,7 @@ public interface RegisterContract {
          * @param repassword 确认密码
          * @return
          */
-        Observable<DataResponse<User>> doRegister(String username, String password, String repassword);
+        Observable<DataResponse<UserBean>> doRegister(String username, String password, String repassword);
     }
 
     interface IRegisterView extends IBaseView {
@@ -44,7 +44,7 @@ public interface RegisterContract {
          *
          * @param user 用户信息
          */
-        void showRegisterSuccess(User user);
+        void showRegisterSuccess(UserBean user);
 
         /**
          * 注册失败

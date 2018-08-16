@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.zk.wanandroidtodo.api.ApiService;
 import com.zk.wanandroidtodo.bean.DataResponse;
-import com.zk.wanandroidtodo.bean.User;
+import com.zk.wanandroidtodo.bean.UserBean;
 import com.zk.wanandroidtodo.manager.RetrofitManager;
 import com.zk.wanandroidtodo.utils.RxSchedulers;
 
@@ -33,16 +33,16 @@ public class RegisterModel implements RegisterContract.IRegisterModel {
      * @return
      */
     @Override
-    public Observable<DataResponse<User>> doRegister(final String username, final String password, final String repassword) {
+    public Observable<DataResponse<UserBean>> doRegister(final String username, final String password, final String repassword) {
         return RetrofitManager.createApi(ApiService.class, ApiService.BASE_URL)
                 .doRegister(username, password, repassword)
-                .filter(new Predicate<DataResponse<User>>() {
+                .filter(new Predicate<DataResponse<UserBean>>() {
                     @Override
-                    public boolean test(DataResponse<User> dataResponse) throws Exception {
+                    public boolean test(DataResponse<UserBean> dataResponse) throws Exception {
                         return !TextUtils.isEmpty(username) && !TextUtils.isEmpty(password)
                                 && !TextUtils.isEmpty(repassword);
                     }
                 })
-                .compose(RxSchedulers.<DataResponse<User>>applySchedulers());
+                .compose(RxSchedulers.<DataResponse<UserBean>>applySchedulers());
     }
 }
