@@ -1,10 +1,13 @@
 package com.zk.wanandroidtodo.ui.todo;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.flyco.roundview.RoundTextView;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.zk.wanandroidtodo.R;
 import com.zk.wanandroidtodo.base.BasePresenter;
 import com.zk.wanandroidtodo.base.activity.BaseMVPActivity;
@@ -15,10 +18,13 @@ import com.zk.wanandroidtodo.utils.TimeUtils;
 import com.zk.wanandroidtodo.widgets.ContainsEmojiEditText;
 
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.qqtheme.framework.picker.DatePicker;
+import io.reactivex.functions.Consumer;
 
 /**
  * @description: 添加待办清单页面
@@ -34,6 +40,8 @@ public class AddTodoActivity extends BaseMVPActivity<AddTodoContract.AddTodoPres
     ContainsEmojiEditText etContent;
     @BindView(R.id.tv_date)
     TextView tvDate;
+    @BindView(R.id.tv_submit)
+    RoundTextView tvSubmit;
 
     @NonNull
     @Override
@@ -62,6 +70,23 @@ public class AddTodoActivity extends BaseMVPActivity<AddTodoContract.AddTodoPres
     @Override
     protected void initEvent() {
         super.initEvent();
+        // 防抖操作
+        RxView.clicks(tvSubmit)
+                .throttleFirst(1, TimeUnit.SECONDS)
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        String title = etTitle.getText().toString().trim();
+                        String content = etContent.getText().toString().trim();
+                        String date = tvDate.getText().toString().trim();
+                        if (TextUtils.isEmpty(title)) {
+                            showToast(getString(R.string.add_todo_title_hint));
+                        } else {
+                            // 添加待办清单
+                            mPresenter.addTodo(title, content, date, 0);
+                        }
+                    }
+                });
     }
 
     @Override
@@ -76,17 +101,17 @@ public class AddTodoActivity extends BaseMVPActivity<AddTodoContract.AddTodoPres
                 // 选择日期
                 createDatePicker();
                 break;
-            case R.id.tv_submit:
-                String title = etTitle.getText().toString().trim();
-                String content = etContent.getText().toString().trim();
-                String date = tvDate.getText().toString().trim();
-                if (TextUtils.isEmpty(title)) {
-                    showToast(getString(R.string.add_todo_title_hint));
-                } else {
-                    // 添加待办清单
-                    mPresenter.addTodo(title, content, date, 0);
-                }
-                break;
+//            case R.id.tv_submit:
+//                String title = etTitle.getText().toString().trim();
+//                String content = etContent.getText().toString().trim();
+//                String date = tvDate.getText().toString().trim();
+//                if (TextUtils.isEmpty(title)) {
+//                    showToast(getString(R.string.add_todo_title_hint));
+//                } else {
+//                    // 添加待办清单
+//                    mPresenter.addTodo(title, content, date, 0);
+//                }
+//                break;
             default:
                 break;
         }

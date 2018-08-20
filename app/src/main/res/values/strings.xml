@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WTodo</string>
+    <string name="app_name">TODO</string>
     <string name="dialog_tips">提示</string>
     <string name="dialog_confirm">确定</string>
     <string name="dialog_cancel">取消</string>
@@ -10,6 +10,7 @@
     <string name="login_register">注册</string>
     <string name="login_text">登录</string>
     <string name="login_success">登录成功</string>
+    <string name="login_expired">登录过期，请重新登录</string>
 
     <!--注册-->
     <string name="register_username">请输入用户名</string>

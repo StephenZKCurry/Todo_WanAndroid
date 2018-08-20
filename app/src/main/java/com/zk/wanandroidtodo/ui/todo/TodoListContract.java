@@ -110,5 +110,12 @@ public interface TodoListContract {
          * @param position 清单在列表中的position，用于更新数据
          */
         void updateTodoStatusSuccess(int position);
+
+        /**
+         * 提示登录过期
+         *
+         * @param message 提示信息
+         */
+        void showLoginExpired(String message);
     }
 }

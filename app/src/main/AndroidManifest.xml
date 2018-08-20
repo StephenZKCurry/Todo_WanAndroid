@@ -46,6 +46,14 @@
         <activity
             android:name=".ui.todo.TodoDetailActivity"
             android:screenOrientation="portrait" />
+        <!-- 项目主页页面 -->
+        <activity
+            android:name=".ui.setting.ProjecActivity"
+            android:screenOrientation="portrait" />
+        <!-- 关于页面 -->
+        <activity
+            android:name=".ui.setting.AboutActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

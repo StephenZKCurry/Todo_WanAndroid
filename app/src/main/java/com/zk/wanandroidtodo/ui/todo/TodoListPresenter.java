@@ -5,7 +5,7 @@ import com.zk.wanandroidtodo.base.MyApplication;
 import com.zk.wanandroidtodo.bean.DataResponse;
 import com.zk.wanandroidtodo.bean.TodoListBean;
 import com.zk.wanandroidtodo.utils.Constant;
-import com.zk.wanandroidtodo.utils.NetworkUtils;
+import com.zk.wanandroidtodo.utils.ErrorAction;
 
 import io.reactivex.functions.Consumer;
 
@@ -62,24 +62,31 @@ public class TodoListPresenter extends TodoListContract.TodoListPresenter {
                 .subscribe(new Consumer<DataResponse<TodoListBean>>() {
                     @Override
                     public void accept(DataResponse<TodoListBean> dataResponse) throws Exception {
-                        if (page == 1) {
-                            // 下拉刷新
-                            mIView.showTodoList(dataResponse.getData(), Constant.TYPE_REFRESH_SUCCESS);
-                            mIView.showRefreshView(false);
+                        if (dataResponse.getErrorCode() == Constant.REQUEST_SUCCESS) {
+                            if (page == 1) {
+                                // 下拉刷新
+                                mIView.showTodoList(dataResponse.getData(), Constant.TYPE_REFRESH_SUCCESS);
+                            } else {
+                                // 上拉加载
+                                mIView.showTodoList(dataResponse.getData(), Constant.TYPE_LOAD_MORE_SUCCESS);
+                            }
                         } else {
-                            // 上拉加载
-                            mIView.showTodoList(dataResponse.getData(), Constant.TYPE_LOAD_MORE_SUCCESS);
+                            if (dataResponse.getErrorMsg().equals("请先登录！")) {
+                                mIView.showLoginExpired(MyApplication.getContext().getString(R.string.login_expired));
+                            }
                         }
+                        mIView.showRefreshView(false);
                     }
-                }, new Consumer<Throwable>() {
+                }, new ErrorAction() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        boolean available = NetworkUtils.isAvailable(MyApplication.getContext());
-                        if (!available) {
-                            mIView.showNoNet();
-                        } else {
-                            mIView.showFaild(throwable.getMessage());
-                        }
+                    public void onNetError(Throwable throwable) {
+                        mIView.showNoNet();
+                        mIView.showRefreshView(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        mIView.showFaild(throwable.getMessage());
                         mIView.showRefreshView(false);
                     }
                 }));
@@ -108,16 +115,15 @@ public class TodoListPresenter extends TodoListContract.TodoListPresenter {
                             mIView.showToast(MyApplication.getContext().getString(R.string.delete_todo_failed));
                         }
                     }
-                }, new Consumer<Throwable>() {
+                }, new ErrorAction() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        boolean available = NetworkUtils.isAvailable(MyApplication.getContext());
-                        if (!available) {
-                            mIView.showNoNet();
-                        } else {
-                            mIView.showFaild(throwable.getMessage());
-                        }
-                        mIView.showRefreshView(false);
+                    public void onNetError(Throwable throwable) {
+                        mIView.showNoNet();
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        mIView.showFaild(throwable.getMessage());
                     }
                 }));
     }
@@ -146,16 +152,15 @@ public class TodoListPresenter extends TodoListContract.TodoListPresenter {
                             mIView.showToast(MyApplication.getContext().getString(R.string.update_todo_status_failed));
                         }
                     }
-                }, new Consumer<Throwable>() {
+                }, new ErrorAction() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        boolean available = NetworkUtils.isAvailable(MyApplication.getContext());
-                        if (!available) {
-                            mIView.showNoNet();
-                        } else {
-                            mIView.showFaild(throwable.getMessage());
-                        }
-                        mIView.showRefreshView(false);
+                    public void onNetError(Throwable throwable) {
+                        mIView.showNoNet();
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        mIView.showFaild(throwable.getMessage());
                     }
                 }));
     }

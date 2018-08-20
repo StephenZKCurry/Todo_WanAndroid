@@ -20,8 +20,10 @@ import com.zk.wanandroidtodo.bean.TodoSection;
 import com.zk.wanandroidtodo.rxbus.RxBus;
 import com.zk.wanandroidtodo.rxbus.Subscribe;
 import com.zk.wanandroidtodo.rxbus.ThreadMode;
+import com.zk.wanandroidtodo.ui.mine.LoginActivity;
 import com.zk.wanandroidtodo.utils.ActivityUtils;
 import com.zk.wanandroidtodo.utils.Constant;
+import com.zk.wanandroidtodo.utils.SpUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -170,6 +172,23 @@ public class TodoListFragment extends BaseMVPFragment<TodoListContract.TodoListP
 //        mAdapter.remove(position);
         // 通知列表页刷新数据
         RxBus.get().send(Constant.RX_BUS_CODE_REFRESH_STATUS);
+    }
+
+    /**
+     * 登录过期
+     *
+     * @param message 提示信息
+     */
+    @Override
+    public void showLoginExpired(String message) {
+        showToast(message);
+        // 清除本地保存的用户信息
+//        SpUtils.clearSp(mContext);
+        SpUtils.setString(mContext, Constant.USER_ID, "");
+        SpUtils.setString(mContext, Constant.USER_NAME, "");
+        // 跳转登录页面
+        ActivityUtils.startActivity(mContext, new Intent(mContext, LoginActivity.class));
+        ActivityUtils.finishActivity(mContext);
     }
 
     /**

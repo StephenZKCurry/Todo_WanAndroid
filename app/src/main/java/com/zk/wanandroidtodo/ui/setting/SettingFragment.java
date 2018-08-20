@@ -1,11 +1,10 @@
-package com.zk.wanandroidtodo.ui;
+package com.zk.wanandroidtodo.ui.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -32,14 +31,6 @@ public class SettingFragment extends BaseFragment {
     TextView tvUsernameHead;
     @BindView(R.id.tv_username)
     TextView tvUsername;
-    @BindView(R.id.rl_nightmode)
-    RelativeLayout rlNightmode;
-    @BindView(R.id.rl_github)
-    RelativeLayout rlGithub;
-    @BindView(R.id.rl_about)
-    RelativeLayout rlAbout;
-    @BindView(R.id.rl_logout)
-    RelativeLayout rlLogout;
 
     public static SettingFragment newInstance() {
         Bundle args = new Bundle();
@@ -80,10 +71,12 @@ public class SettingFragment extends BaseFragment {
                 switchNight(SpUtils.getBoolean(mContext, Constant.NIGHT_MODEL, false));
                 break;
             case R.id.rl_github:
-
+                // 跳转项目主页
+                ActivityUtils.startActivity(mContext, new Intent(mContext, ProjecActivity.class));
                 break;
             case R.id.rl_about:
-
+                // 跳转关于页面
+                ActivityUtils.startActivity(mContext, new Intent(mContext, AboutActivity.class));
                 break;
             case R.id.rl_logout:
                 // 退出登录
@@ -98,7 +91,7 @@ public class SettingFragment extends BaseFragment {
 //                                SpUtils.clearSp(mContext);
                                 SpUtils.setString(mContext, Constant.USER_ID, "");
                                 SpUtils.setString(mContext, Constant.USER_NAME, "");
-                                // 清除cookies,不清除的话会保持登录状态，请求时还回携带cookie
+                                // 清除cookies,不清除的话会保持登录状态，请求时还会携带cookie
                                 new SharedPrefsCookiePersistor(mContext).clear();
                                 // 跳转登录页
                                 ActivityUtils.startActivity(mContext, new Intent(mContext, LoginActivity.class));

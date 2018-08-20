@@ -6,7 +6,7 @@ import com.zk.wanandroidtodo.R;
 import com.zk.wanandroidtodo.base.MyApplication;
 import com.zk.wanandroidtodo.bean.DataResponse;
 import com.zk.wanandroidtodo.utils.Constant;
-import com.zk.wanandroidtodo.utils.NetworkUtils;
+import com.zk.wanandroidtodo.utils.ErrorAction;
 
 import io.reactivex.functions.Consumer;
 
@@ -54,15 +54,15 @@ public class TodoDetailPresenter extends TodoDetailContract.TodoDetailPresenter 
                             mIView.showToast(MyApplication.getContext().getString(R.string.update_todo_failed));
                         }
                     }
-                }, new Consumer<Throwable>() {
+                }, new ErrorAction() {
                     @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        boolean available = NetworkUtils.isAvailable(MyApplication.getContext());
-                        if (!available) {
-                            mIView.showNoNet();
-                        } else {
-                            mIView.showFaild(throwable.getMessage());
-                        }
+                    public void onNetError(Throwable throwable) {
+                        mIView.showNoNet();
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        mIView.showFaild(throwable.getMessage());
                     }
                 }));
     }
